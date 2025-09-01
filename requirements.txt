@@ -1,3 +1,4 @@
+uvicorn
 fastapi
 elasticsearch~=8.15.0
 nltk
