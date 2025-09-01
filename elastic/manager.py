@@ -1,6 +1,6 @@
 from data_loader.data_loader import DataLoader
-from elastic import Elastic
-from elasticsearch import Elasticsearch, helpers
+from elastic.elastic_dal import Elastic
+from elasticsearch import Elasticsearch
 import time
 
 
@@ -10,7 +10,7 @@ class Manager:
         self.data_loader.read_tweets_csv()
         self.data_loader.read_weapons_txt()
         self.elastic = Elastic()
-        self.es = Elasticsearch('http://localhost:9200')
+        self.es = Elasticsearch('http://es:9200')
         self.index_name = 'tweets'
 
         self.process = False
@@ -26,7 +26,7 @@ class Manager:
         time.sleep(30)
         self.elastic.add_weapon_field(self.data_loader.weapons)
         time.sleep(60)
-        self.elastic.delete_empty_tweets()
+        self.elastic.delete_not_relevant_tweets()
         self.process = True
 
     def find_antisemitic_weapons(self):

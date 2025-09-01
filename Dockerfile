@@ -1,0 +1,13 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+
+COPY data .
+COPY data_loader .
+COPY elastic .
+
+CMD ["python", "-m", "elastic.main"]

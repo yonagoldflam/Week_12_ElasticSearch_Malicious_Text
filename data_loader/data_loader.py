@@ -8,13 +8,13 @@ class DataLoader:
 
 
     def read_tweets_csv(self):
-        with open("../data/tweets_injected 3.csv", newline='', encoding='utf-8') as csv_file:
+        with open("data/tweets_injected 3.csv", newline='', encoding='utf-8') as csv_file:
             reader = csv.DictReader(csv_file)
             for row in reader:
                 self.tweets_data.append(row)
 
     def read_weapons_txt(self):
-        with open("../data/weapon_list.txt", encoding='utf-8') as weapons:
+        with open("data/weapon_list.txt", encoding='utf-8') as weapons:
             self.weapons = weapons.read()
 
 

@@ -1,10 +1,10 @@
 from elasticsearch import Elasticsearch, helpers
-from classifier import Classifier
+from elastic.classifier import Classifier
 
 
 class Elastic:
     def __init__(self):
-        self.es = Elasticsearch('http://localhost:9200')
+        self.es = Elasticsearch('http://es:9200')
         self.index_name = 'tweets'
 
 
@@ -81,7 +81,7 @@ class Elastic:
             helpers.bulk(self.es, actions)
             print(f' updated {len(actions)} weapons')
 
-    def delete_empty_tweets(self):
+    def delete_not_relevant_tweets(self):
         query = {
             'query': {
                 'bool': {
