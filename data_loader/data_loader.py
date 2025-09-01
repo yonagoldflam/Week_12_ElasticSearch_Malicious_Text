@@ -26,6 +26,6 @@ d = DataLoader()
 d.read_tweets_csv()
 d.read_weapons_txt()
 print(d.tweets_data[0].keys())
-print(d.weapons)
+# print(d.weapons)
 
 # dict_keys(['TweetID', 'CreateDate', 'Antisemitic', 'text'])
