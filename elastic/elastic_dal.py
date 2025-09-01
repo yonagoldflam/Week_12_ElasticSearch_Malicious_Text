@@ -34,7 +34,13 @@ class Elastic:
                 }
             }
         }
-        self.es.indices.create(index=self.index_name, body=mappings)
+        if not self.es.indices.exists(index=self.index_name):
+            self.es.indices.create(index=self.index_name, body=mappings)
+        else:
+            print(f'alredy exist indexed')
+
+
+
 
     def index_to_elastic(self, documents: list[dict]):
         actions = []

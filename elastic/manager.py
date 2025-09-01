@@ -40,3 +40,5 @@ class Manager:
         return {'the system has not finished processing the information yet. Please try again in a few minutes'}
 
 
+
+
