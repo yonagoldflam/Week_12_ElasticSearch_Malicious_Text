@@ -14,3 +14,18 @@ class Classifier:
             return  "neutral"
         else:
             return "negative"
+
+    @staticmethod
+    def find_weapons(text, weapons):
+        result = ''
+        text= text.split()
+        weapons = weapons.split('\n')
+        for weapon in weapons:
+            if weapon.lower() in text:
+                result += weapon
+
+        return result
+
+
+
+
