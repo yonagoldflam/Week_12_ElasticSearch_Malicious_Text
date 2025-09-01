@@ -1,0 +1,4 @@
+docker network create elastic
+docker run -d --name es --network elastic -p 9200:9200 -e "discovery.type=single-node" -e "xpack.security.enabled=false" -e "ES_JAVA_OPTS=-Xms1g -Xmx1g" docker.elastic.co/elasticsearch/elasticsearch:8.15.0
+docker build -t elastic_image .
+docker run -d --name elastic_container --network elastic -p 8000:8000 elastic_image
