@@ -1,44 +1,18 @@
-from elasticsearch import Elasticsearch
+import uvicorn as uv
+from fastapi import FastAPI
+from manager import Manager
 
-class Elastic:
-    def __init__(self):
-        self.es = Elasticsearch('http://localhost:9200')
-        self.index_name = 'tweets'
-
-    def mapping(self):
-
-        mappings = {
-            "mappings": {
-                "properties": {
-                    "TweetID": {
-                        "type": "keyword"
-                    },
-                    "CreateDate": {
-                        "type": "text"
-                    },
-                    "Antisemitic": {
-                        "type": "integer"
-                    },
-                    "text": {
-                        "type": "text",
-                        "fields": {
-                            "keyword": {
-                                "type": "keyword",
-                                "ignore_above": 256
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        self.es.indices.create(index=self.index_name, body=mappings)
-
-    def index_to_elastic(self, documents: list[dict]):
-        for index, document in enumerate(documents):
-            r = self.es.index(index=self.index_name, id=str(index), document=document)
-            print(f'inserted {index} documents')
-
-    def update(self):
-        self.es.update()
+app = FastAPI()
+manager = Manager()
 
 
+@app.get('/data')
+def get_data():
+    return manager.find_antisemitic_weapons()
+
+@app.get('/weapons')
+def get_weapons():
+    return manager.find_least_2_weapons()
+
+if __name__ == '__main__':
+    uv.run('main:app', host='127.0.0.1', port=8000)

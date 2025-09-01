@@ -17,12 +17,12 @@ class Classifier:
 
     @staticmethod
     def find_weapons(text, weapons):
-        result = ''
+        result = []
         text= text.split()
         weapons = weapons.split('\n')
         for weapon in weapons:
             if weapon.lower() in text:
-                result += weapon
+                result .append(weapon)
 
         return result
 
