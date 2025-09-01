@@ -36,7 +36,7 @@ class Manager:
 
     def find_least_2_weapons(self):
         if self.process:
-            return self.elastic.find_antisemitic_weapons()
+            return self.elastic.find_least_2_weapons()
         return {'the system has not finished processing the information yet. Please try again in a few minutes'}
 
 
